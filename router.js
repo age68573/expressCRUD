@@ -28,10 +28,27 @@ router.get('/students', (req, res) => {
   //     students: JSON.parse(data).students
   //   })
   // })
-  Student.find(function (err, students) {
-    if (err) {
-      return res.status(500).send('Server Error')
-    }
+
+  // 使用回掉函數
+
+  // Student.find(function (err, students) {
+  //   if (err) {
+  //     return res.status(500).send('Server Error')
+  //   }
+  //   res.render('index.html', {
+  //     colors: [
+  //       'red',
+  //       'yellow',
+  //       'blue',
+  //       'green'
+  //     ],
+  //     students: students
+  //   })
+  // })
+
+  // 使用 Promise
+
+  Student.find().then(students => {
     res.render('index.html', {
       colors: [
         'red',
@@ -41,6 +58,11 @@ router.get('/students', (req, res) => {
       ],
       students: students
     })
+  }).catch(err => {
+    if (err) {
+      // console.log(res.send(err));
+      return res.status(500).send('Server Error')
+    }
   })
 })
 router.get('/students/new', (req, res) => {

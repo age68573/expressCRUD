@@ -5,7 +5,7 @@
  * 
  */
 const fs = require('fs')
-const dbPath = './db.json'
+const dbPath = './ddb.json'
 /**
  * 獲取所有學生列表
  * callback 中的參數
@@ -17,13 +17,24 @@ const dbPath = './db.json'
  *    錯誤是 undifind
  */
 
-exports.find = function (callback) {
-  // var callback = function (err, students) {}
-  fs.readFile(dbPath, 'utf8', (err, data) => {
-    if (err) {
-      return callback(err)
-    }
-    callback(null, JSON.parse(data).students)
+// exports.find = function (callback) {
+//   // var callback = function (err, students) {}
+//   fs.readFile(dbPath, 'utf8', (err, data) => {
+//     if (err) {
+//       return callback(err)
+//     }
+//     callback(null, JSON.parse(data).students)
+//   })
+// }
+
+exports.find = function () {
+  return new Promise ((resolve, reject) => {
+    fs.readFile(dbPath, 'utf8', (err, data) => {
+      if (err) {
+        return reject(err)
+      }
+      resolve(JSON.parse(data).students)
+    })
   })
 }
 
