@@ -3,7 +3,7 @@
  * 根據不同的方法請求設置不同的處理函數
 */
 const fs = require('fs')
-
+const Student = require('./student')
 // express 提供了封裝路由的方式
 const express = require('express')
 
@@ -13,11 +13,25 @@ const router = express.Router()
 // 2.把路由都掛載到 router 路由容器中
 router.get('/students', (req, res) => {
   // 讀取 JSON 文件 (第二個參數可以轉成 UTF-8 編碼 獲通過 .toString())
-  fs.readFile('./db.json', 'utf-8', (err, data) => {
+  // fs.readFile('./db.json', 'utf-8', (err, data) => {
+  //   if (err) {
+  //     return res.status(500).send('Server Error.')
+  //   }
+  //   // console.log(JSON.parse(data));
+  //   res.render('index.html', {
+  //     colors: [
+  //       'red',
+  //       'yellow',
+  //       'blue',
+  //       'green'
+  //     ],
+  //     students: JSON.parse(data).students
+  //   })
+  // })
+  Student.find(function (err, students) {
     if (err) {
-      return res.status(500).send('Server Error.')
+      return res.status(500).send('Server Error')
     }
-    // console.log(JSON.parse(data));
     res.render('index.html', {
       colors: [
         'red',
@@ -25,11 +39,35 @@ router.get('/students', (req, res) => {
         'blue',
         'green'
       ],
-      students: JSON.parse(data).students
+      students: students
     })
   })
 })
 router.get('/students/new', (req, res) => {
+  res.render('new.html')
+})
+router.post('/students/new', (req, res) => {
+  // 1. 獲取表單數據
+  // 2. 處理: 數據保存到 db.json
+  // 3. 發送響應
+  // console.log(req.body)
+  fs.readFile('./db.json', 'utf-8', (err, data) => {
+    if (err) {
+      return res.status(500).send('Server Error.')
+    }
+    console.log(res.send(data));
+    var students = JSON.parse(data).students
+    console.log(students);
+  })
+
+})
+router.get('/students/edit', (req, res) => {
+
+})
+router.post('/students/edit', (req, res) => {
+
+})
+router.get('/students/delete', (req, res) => {
 
 })
 

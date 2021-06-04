@@ -6,7 +6,7 @@
 | -------- | ---------------- | -------- | ------------------------------ | ---------------- |
 | GET      | /students        |          |                                | 渲染首頁         |
 | GET      | /students/new    |          |                                | 渲染添加學生頁面 |
-| POST     | /students        |          | name, age, gender, hobbies     | 處理添加學生請求 |
+| POST     | /students/new    |          | name, age, gender, hobbies     | 處理添加學生請求 |
 | GET      | /students/edit   | id       | name, age, gender, hobbies     | 渲染編輯頁面     |
 | POST     | /students/edit   |          | id, name, age, gender, hobbies | 處理編輯頁面     |
 | GET      | /students/delete | id       |                                | 處理刪除請求     |
