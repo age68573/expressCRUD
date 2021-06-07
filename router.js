@@ -122,7 +122,13 @@ router.post('/students/edit', (req, res) => {
   })
 })
 router.get('/students/delete', (req, res) => {
-
+  console.log(req.query.id);
+  Student.deleteById(req.query.id, err => {
+    if (err) {
+      return res.status(500).send('Server Error.')
+    }
+    res.redirect('/students')
+  })
 })
 
 // 3. 將 router 導出

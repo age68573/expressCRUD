@@ -124,6 +124,27 @@ exports.save = function (student) {
  * 刪除學生
  */
 
- exports.delete = function () {
-  
+ exports.deleteById = function (id, callback) {
+  // 1. 獲取要刪除的 id
+  // 2. 根據 id 執行刪除操作
+  // 3. 根據操作結果發送響應數據
+  fs.readFile(dbPath, 'utf8', (err, data) => {
+    if (err) {
+      return callback(err)
+    }
+    var students = JSON.parse(data).students
+    var deleteId = students.findIndex(item => {
+      return item.id === parseInt(id)
+    })
+    students.splice(deleteId, 1)
+    var fileData = JSON.stringify({
+      students: students
+    })
+    fs.writeFile(dbPath, fileData, err => {
+      if (err) {
+        return callback(err)
+      }
+      callback(null)
+    })
+  })
 }
