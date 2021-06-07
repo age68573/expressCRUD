@@ -90,11 +90,36 @@ router.post('/students/new', (req, res) => {
   })
 
 })
-router.get('/students/edit', (req, res) => {
 
+/**
+ * 渲染編輯學生頁面
+ */
+router.get('/students/edit', (req, res) => {
+  // 在客戶端的列表中處理連結問題(需要有id參數)
+  // 或取要編輯的學生 id
+  // 渲染編輯頁面
+      // 根據 id 將學生訊息查出
+      // 使用模板引擎渲染
+  console.log(req.query.id);
+  Student.findById(parseInt(req.query.id), function (err, student) {
+    if (err) {
+      return res.status(500).send('Server Error.')
+    }
+    res.render('edit.html', {
+      student: student
+    })
+  })
 })
 router.post('/students/edit', (req, res) => {
-
+  // 1.獲取表單數據 req.body
+  // 2. 更新 Student.updateById
+  // 3. 發送響應
+  Student.updateById(req.body, err => {
+    if (err) {
+      return res.status(500).send('Server Error.')
+    }
+    res.redirect('/students')
+  })
 })
 router.get('/students/delete', (req, res) => {
 

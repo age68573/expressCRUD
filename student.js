@@ -39,6 +39,24 @@ exports.find = function () {
 }
 
 /**
+ * 根據 id 獲取學生信息對象
+ * @param {Number} id 學生id
+ * @param {Function} callback  回調函數
+ */
+exports.findById = function (id, callback) {
+  fs.readFile(dbPath, 'utf8', (err, data) => {
+    if (err) {
+      return callback(err)
+    }
+    var students = JSON.parse(data).students
+    var res = students.find(item => {
+      return item.id === parseInt(id)
+    })
+    callback(null, res)
+  })
+}
+
+/**
  * 添加保存學生
  */
 
@@ -73,8 +91,34 @@ exports.save = function (student) {
  * 更新學生
  */
 
- exports.update = function () {
-  
+ exports.updateById = function (student, callback) {
+  fs.readFile(dbPath, 'utf8', (err, data) => {
+    if (err) {
+      return callback(err)
+    }
+    var students = JSON.parse(data).students
+    // 要修改誰，就需要把誰找出來 (根據 id)
+    student.id = parseInt(student.id)
+    var stu = students.find(item => {
+      return item.id === student.id
+    })
+    // 遍例拷貝對象
+    for (var key in student) {
+      stu[key] = student[key]
+    }
+    
+    var fileData = JSON.stringify({
+      students: students
+    })
+
+    fs.writeFile(dbPath, fileData, (err) => {
+      if (err) {
+        // 錯誤就是把錯誤對象傳遞給她
+        return callback(err)
+      }
+      callback(null)
+    })
+  })
 }
 /**
  * 刪除學生
