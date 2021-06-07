@@ -73,13 +73,20 @@ router.post('/students/new', (req, res) => {
   // 2. 處理: 數據保存到 db.json
   // 3. 發送響應
   // console.log(req.body)
-  fs.readFile('./db.json', 'utf-8', (err, data) => {
+  // fs.readFile('./db.json', 'utf-8', (err, data) => {
+  //   if (err) {
+  //     return res.status(500).send('Server Error.')
+  //   }
+  //   console.log(res.send(data));
+  //   var students = JSON.parse(data).students
+  //   console.log(students);
+  // })
+  Student.save(req.body).then(students => {
+    res.redirect('/students');
+  }).catch(err => {
     if (err) {
-      return res.status(500).send('Server Error.')
+      return res.status(500).send("保存失敗")
     }
-    console.log(res.send(data));
-    var students = JSON.parse(data).students
-    console.log(students);
   })
 
 })

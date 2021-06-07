@@ -5,7 +5,7 @@
  * 
  */
 const fs = require('fs')
-const dbPath = './ddb.json'
+const dbPath = './db.json'
 /**
  * 獲取所有學生列表
  * callback 中的參數
@@ -42,7 +42,30 @@ exports.find = function () {
  * 添加保存學生
  */
 
- exports.save = function () {
+exports.save = function (student) {
+  return new Promise((resolve, reject) => {
+    console.log(student);
+    fs.readFile(dbPath, 'utf8', (err, data) => {
+      if (err) {
+        return reject(err)
+      }
+      var students = JSON.parse(data).students
+      student.id = students[students.length - 1].id + 1 // 處理 id 
+      // 把用戶傳遞的對象保存到陣列中
+      students.push(student)
+      // 把對象轉成字串
+      var fileData = JSON.stringify({
+        students: students
+      })
+      // 把字串寫入文件中
+      fs.writeFile(dbPath, fileData, err => {
+        if (err) {
+          return reject(err)
+        }
+        resolve(fileData)
+      })
+    })
+  })
   
 }
 

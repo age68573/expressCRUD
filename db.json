@@ -1,10 +1,1 @@
-{
-  "students": [
-    {"id": 1, "name": "jeremy", "gender": "0", "age": 22, "hobbies": "football, basketball, music"},
-    {"id": 2, "name": "jeremy", "gender": "0", "age": 22, "hobbies": "football, basketball, music"},
-    {"id": 3, "name": "jeremy", "gender": "0", "age": 22, "hobbies": "football, basketball, music"},
-    {"id": 4, "name": "jeremy", "gender": "0", "age": 22, "hobbies": "football, basketball, music"},
-    {"id": 5, "name": "jeremy", "gender": "0", "age": 22, "hobbies": "football, basketball, music"},
-    {"id": 6, "name": "jeremy", "gender": "0", "age": 22, "hobbies": "football, basketball, music"}
-  ]
-}
+{"students":[{"id":1,"name":"jeremy","gender":"0","age":22,"hobbies":"football, basketball, music"},{"id":2,"name":"jeremy","gender":"0","age":22,"hobbies":"football, basketball, music"},{"id":3,"name":"jeremy","gender":"0","age":22,"hobbies":"football, basketball, music"},{"id":4,"name":"jeremy","gender":"0","age":22,"hobbies":"football, basketball, music"},{"id":5,"name":"jeremy","gender":"0","age":22,"hobbies":"football, basketball, music"},{"id":6,"name":"jeremy","gender":"0","age":22,"hobbies":"football, basketball, music"},{"name":"new","gender":"0","age":"150","hobbies":"new","id":7},{"name":"new","gender":"0","age":"150","hobbies":"new","id":8},{"name":"123","gender":"1","age":"999","hobbies":"999","id":9}]}
