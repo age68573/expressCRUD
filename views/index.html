@@ -94,6 +94,7 @@
                   <th>性別</th>
                   <th>年齡</th>
                   <th>興趣</th>
+                  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,6 +105,10 @@
                   <td>{{ $value.gender }}</td>
                   <td>{{ $value.age }}</td>
                   <td>{{ $value.hobbies }}</td>
+                  <td>
+                    <a href="/students/edit?id={{$value.id}}">編輯</a>
+                    <a href="/students/delete?id={{$value.id}}">刪除</a>
+                  </td>
                 </tr>
                 {{ /each }}
               </tbody>
